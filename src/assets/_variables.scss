@@ -1,0 +1,141 @@
+$primary-color: black;
+$secondary-color: lighten($primary-color, 40%);
+
+/* Bootstrap Overwrites */
+// https://coolors.co/f94144-f3722c-f8961e-f9c74f-90be6d-43aa8b-577590
+$green: #43aa8b;
+$lighter-green: lighten($green, 30%);
+
+$yellow: #f9c74f;
+$lighter-yellow: lighten($yellow, 30%);
+$darker-yellow: darken($yellow, 30%);
+
+$theme-colors: (
+  'primary': $primary-color,
+  'success': $green,
+  'warning': #f29f05,
+  'danger': #a6170a,
+  'text': white
+);
+
+$black: #000;
+$light-gray: rgb(238, 240, 242);
+$gray: #454545;
+
+$shadow-gray: rgba($black, 0.15);
+
+$body-bg: rgb(250, 250, 250);
+$body-color: $gray;
+
+$input-bg: rgb(238, 240, 242);
+
+$calendar-red: #d65415;
+
+$font-family-sans-serif: 'IBM Plex Sans Condensed', 'Helvetica Neue', sans-serif;
+$font-weight-bold: 500;
+
+$btn-padding-y: 0.6125rem;
+$btn-padding-x: 1rem;
+$btn-font-weight: $font-weight-bold;
+
+$border-radius: 0.225rem;
+$border-radius-lg: $border-radius;
+$border-radius-sm: $border-radius;
+
+$navbar-padding: 0.8125rem;
+
+$card-inner-border-radius: $border-radius;
+
+// Spacing
+//
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+// You can add more entries to the $spacers map, should you need more variation.
+
+$spacer: 1rem !default;
+$spacers: () !default;
+
+/* beautify ignore:start */
+$spacers: map-merge(
+  (
+    0: 0,
+    1: (
+      $spacer * 0.25
+    ),
+    // 4px
+    2:
+      (
+        $spacer * 0.5
+      ),
+    // 8px
+    3:
+      (
+        $spacer * 0.75
+      ),
+    // 12px
+    4: $spacer,
+    // 16px
+    5:
+      (
+        $spacer * 1.5
+      ),
+    // 24px
+    6:
+      (
+        $spacer * 2
+      ),
+    // 32px
+    7:
+      (
+        $spacer * 2.5
+      ),
+    // 40px
+    8:
+      (
+        $spacer * 3
+      ),
+    // 48px
+    9:
+      (
+        $spacer * 4
+      ),
+    // 64px
+    10:
+      (
+        $spacer * 5
+      ),
+    // 80px
+    11:
+      (
+        $spacer * 6
+      ),
+    // 96px
+    12:
+      (
+        $spacer * 8
+      ),
+    // 128px
+    13:
+      (
+        $spacer * 10
+      ),
+    // 160px
+    14:
+      (
+        $spacer * 12
+      ),
+    // 192px
+    15:
+      (
+        $spacer * 16
+      ),
+    // 256px
+    16:
+      (
+        $spacer * 25
+      ),
+    // 400px
+  ),
+  $spacers
+);
+/* beautify ignore:end */

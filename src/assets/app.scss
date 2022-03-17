@@ -1,0 +1,32 @@
+@import '_variables';
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&display=swap');
+
+@font-face {
+  font-family: 'HKGrotesk';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url('./fonts/HKGrotesk-Light.woff2') format('woff2');
+}
+
+@import 'bootstrap/scss/bootstrap';
+
+#app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.kontera-fade-enter-active,
+.kontera-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.kontera-fade-enter, .kontera-fade-leave-to
+  /* .component-fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1) !important;
+}

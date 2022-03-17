@@ -1,0 +1,73 @@
+stages:
+  - build
+  - deploy
+
+build-staging:
+  stage: build
+  image: node:16
+  variables:
+    VUE_APP_SITE_URL: $VUE_APP_SITE_URL
+  tags:
+    - container
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 week
+  environment: staging
+
+build-production:
+  stage: build
+  image: node:16
+  variables:
+    VUE_APP_SITE_URL: $VUE_APP_SITE_URL
+  tags:
+    - container
+  script:
+    - npm ci
+    - npm run build
+    - cp -r dist/ dist-production/
+  artifacts:
+    paths:
+      - dist-production/
+    expire_in: 1 week
+  environment: production
+  only:
+    - master
+
+deploy-staging:
+  needs:
+    - build-staging
+  variables:
+    GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS
+  stage: deploy
+  image: google/cloud-sdk
+  tags:
+    - container
+  before_script:
+    - echo $GOOGLE_APPLICATION_CREDENTIALS > ./credentials.json
+    - gcloud auth activate-service-account --key-file=./credentials.json
+  script:
+    - 'gsutil -h "Cache-Control: no-cache, max-age=0" -m rsync -r -c -d "./dist" gs://$GOOGLE_STORAGE_BUCKET'
+  environment: staging
+
+deploy-production:
+  needs:
+    - build-production
+  variables:
+    GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS
+  stage: deploy
+  image: google/cloud-sdk
+  when: manual
+  tags:
+    - container
+  before_script:
+    - echo $GOOGLE_APPLICATION_CREDENTIALS > ./credentials.json
+    - gcloud auth activate-service-account --key-file=./credentials.json
+  script:
+    - 'gsutil -h "Cache-Control: no-cache, max-age=0" -m rsync -r -c -d "./dist-production" gs://$GOOGLE_STORAGE_BUCKET'
+  environment: production
+  only:
+    - master
