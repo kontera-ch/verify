@@ -2,13 +2,13 @@
   <div class="position-relative">
     <slot />
     <transition name="kontera-fade">
-      <div class="loader d-flex" v-if="isLoading">
+      <div class="loader d-flex" v-if="isLoading || complete">
         <div class="d-flex flex-grow-1 flex-column justify-content-center align-items-center">
+          <div class="loader-bg"></div>
           <div :style="{ transform: `scale(${scale}`, margin: `${scale * 1}rem` }">
-            <div class="circle-loader" :class="{ 'load-complete': complete || hasError, error: hasError }">
-              <div class="checkmark draw none" :class="{ 'd-block': complete && !hasError }"></div>
-              <div class="errormark draw none" :class="{ 'd-block': hasError }"></div>
-            </div>
+            <div class="circle-loader" :class="{ 'load-complete': complete || hasError, error: hasError }"></div>
+            <div class="checkmark draw none" :class="{ 'd-block': complete && !hasError }"></div>
+            <div class="errormark draw none" :class="{ 'd-block': hasError }"></div>
           </div>
           <div v-if="!complete && !hasError" class="slot-text">
             <slot name="loading" />
@@ -76,12 +76,22 @@ $error-right: ($loader-size/12 + $loader-size/6);
   height: 100%;
   width: 100%;
   position: absolute;
+  border: 1px solid transparent;
+}
+
+.loader-bg {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
   background: white;
   opacity: 0.5;
 }
 
 .slot-text {
   padding-top: 1rem;
+  z-index: 10;
 }
 
 .circle-loader {
