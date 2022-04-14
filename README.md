@@ -1,29 +1,27 @@
-# kontera-verify
+# Kontera Verify
+
+Stand-alone application to verify Kontera-generated timestamping proofs with original files and their inclusion on the Tezos Blockchain.
 
 ## Project setup
+
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-yarn serve
+npm serve
 ```
 
 ### Compiles and minifies for production
+
 ```
-yarn build
+npm build
 ```
 
 ### Run your unit tests
-```
-yarn test:unit
-```
 
-### Lints and fixes files
 ```
-yarn lint
+npm test:unit
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
