@@ -1,4 +1,4 @@
-import { b58cencode, hex2buf } from '@taquito/utils';
+import { b58cencode, hex2buf, prefix, Prefix } from '@taquito/utils';
 import axios from 'axios';
 import { Operation } from './operations/Operation';
 import { Blake2bOperation } from './operations/types/Blake2bOperation';
@@ -46,6 +46,20 @@ export default class TezosBlockHeaderProof extends AbstractProof {
     };
   }
 
+  get blockHeaderHash(): string {
+    return b58cencode(this.derivation, prefix[Prefix.B]);
+  }
+
+  async verify(rpcUrl: string): Promise<boolean> {
+    const { data: blockData } = await axios.get(`${rpcUrl}/chains/${this.network}/blocks/${this.blockHeaderHash}/header`);
+
+    if (new Date(blockData.timestamp).getTime() !== new Date(this.timestamp).getTime()) {
+      throw new Error('timestamp mismatch');
+    }
+
+    return true;
+  }
+
   static fromJSON({ hash, operations, timestamp, network }: SerializedTezosBlockHeaderProof): TezosBlockHeaderProof {
     return new TezosBlockHeaderProof({
       hash: new Uint8Array(hex2buf(hash)),
@@ -65,31 +79,5 @@ export default class TezosBlockHeaderProof extends AbstractProof {
       timestamp: new Date(timestamp),
       network: network
     });
-  }
-
-  async verify(rpcUrl: string): Promise<boolean> {
-    const blockHash = this.operations.reduce<Uint8Array>((previousHash, currentOperation) => {
-      return currentOperation.commit(previousHash);
-    }, this.hash);
-
-    const b58cEncodedBlockHash = b58cencode(blockHash, new Uint8Array([1, 52]));
-
-    try {
-      const { data: blockData } = await axios.get(`${rpcUrl}/chains/${this.network}/blocks/${b58cEncodedBlockHash}/header`);
-
-      if (new Date(blockData.timestamp).getTime() !== new Date(this.timestamp).getTime()) {
-        throw 'VERIFIER_ERROR.TIMESTAMP_MISMATCH';
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response?.status === 404) {
-          throw `VERIFIER_ERROR.BLOCK_HEADER_NOT_FOUND`;
-        }
-
-        throw error;
-      }
-    }
-
-    return true;
   }
 }
