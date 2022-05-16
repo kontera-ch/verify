@@ -81,6 +81,7 @@ import TezosBlockHeaderProof from '../lib/kontera/proof/TezosBlockHeaderProof';
 import { NetworkType, TezosNetworkConfig } from '@/services/TezosNetworkConfig';
 import { buf2hex, b58cencode } from '@taquito/utils';
 import { OperationTemplate } from '@/lib/kontera/proof/operations/Operation';
+import { Buffer } from 'buffer';
 
 export default defineComponent({
   props: {
@@ -120,6 +121,7 @@ export default defineComponent({
 
         proofIsValid.value = await props.inputProof.verify(TezosNetworkConfig.rpc(props.inputProof.network).rpc);
       } catch (err) {
+        console.warn(err);
         proofIsValid.value = false;
         proofError.value = (err as Error).message;
       } finally {

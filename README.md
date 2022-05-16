@@ -1,29 +1,32 @@
-# kontera-verify
+[![Build](https://github.com/kontera-ch/verify/actions/workflows/main.yml/badge.svg)](https://github.com/kontera-ch/verify/actions/workflows/main.yml)
+
+# Kontera Verify
+
+Stand-alone application to verify Kontera-generated timestamping proofs with original files and their inclusion on the Tezos Blockchain. The project is based on
+
+- node 16
+- Vue 3 + vite
 
 ## Project setup
+
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-yarn serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
+
 ```
-yarn build
+npm run build
 ```
 
-### Run your unit tests
-```
-yarn test:unit
-```
+### Run unit tests
 
-### Lints and fixes files
 ```
-yarn lint
+npm run test
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

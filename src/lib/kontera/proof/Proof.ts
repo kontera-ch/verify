@@ -1,6 +1,8 @@
 import { buf2hex } from '@taquito/utils';
 import { Operation } from './operations/Operation';
 import { SerializedProof } from './SerializedProof';
+import { Buffer } from 'buffer';
+
 export default abstract class AbstractProof {
   operations: Operation[];
   hash: Uint8Array;

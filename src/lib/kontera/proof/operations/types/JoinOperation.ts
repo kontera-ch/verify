@@ -1,5 +1,5 @@
 import { Operation, OperationTemplate } from '../Operation';
-
+import { Buffer } from 'buffer';
 export interface JoinOptions {
   prepend: Uint8Array | undefined;
   append: Uint8Array | undefined;
