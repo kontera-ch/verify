@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
-import ProofVerifier from '@/components/ProofVerifier.vue';
-import inputProof from './proofs/blockHeaderProof.json';
+import ProofVerifier from './ProofVerifier.vue';
+import inputProof from '../../tests/data/proofs/blockHeaderProof.json';
 
 describe('ProofVerifier.vue', () => {
   it('accepted a input hash and proof', async () => {
@@ -8,8 +8,8 @@ describe('ProofVerifier.vue', () => {
 
     const wrapper = shallowMount(ProofVerifier, {
       props: {
-        inputProof,
-        inputHash
+        inputProof: inputProof,
+        inputHash: inputHash
       }
     });
   });
