@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import ProofVerifier from '../src/components/ProofVerifier.vue';
+import ProofVerifier from '@/components/ProofVerifier.vue';
 import inputProof from './proofs/blockHeaderProof.json';
 
 describe('ProofVerifier.vue', () => {
