@@ -1,6 +1,7 @@
 enum NetworkType {
   MAINNET = 'mainnet',
   TESTNET = 'testnet',
+  GHOSTNET = 'ghostnet',
   UNSUPPORTED = 'unsupported'
 }
 
@@ -18,9 +19,9 @@ class TezosNetworkConfig {
         type: NetworkType.TESTNET
       },
       NetXnHfVqm9iesp: {
-        name: 'Tezos Ithacanet',
-        rpc: 'https://rpc.tzkt.io/ithacanet', // ithacanet
-        type: NetworkType.TESTNET
+        name: 'Tezos Ghostnet',
+        rpc: 'https://rpc.ghostnet.teztnets.xyz', // ghostnet
+        type: NetworkType.GHOSTNET
       }
     };
   }
